@@ -5,10 +5,7 @@ import SearchPanel from "../search-panel/search-panel";
 import PostStatusFilter from "../post-status-filter/post-status-filter";
 import PostList from "../post-list/post-list";
 import PostAddForm from "../post-add-form/post-add-form";
-// import PostListItem from "../post-list-item/post-list-item";
 
-
-import './app.css'
 import  styled from 'styled-components';
 
 const cryptoRandomString = require('crypto-random-string');
@@ -17,30 +14,24 @@ const AppBlock = styled.div`
   margin: 0 auto;
   max-width: 800px;
 `
+const SearchPanelStyle = styled.div`
+  margin: 1rem 0;
+  display: flex;
+`
 
 
 export default class App extends Component  {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [
-                {label: 'Going to learn React', important: true, like: false, id: 1},
-                {label: 'Something more', important: false, like: false, id: 2},
-                {label: "I'm not feel so good", important: false, like: false, id: 3}
-            ],
-            term: '',
-            filter: 'all'
-        }
-        this.deleteItem = this.deleteItem.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.onToggleImportant = this.onToggleImportant.bind(this);
-        this.onToggleLiked = this.onToggleLiked.bind(this);
-        this._setImporLike = this._setImporLike.bind(this);
-        this.onUpdateSearch = this.onUpdateSearch.bind(this);
-        this.onFilterSelect = this.onFilterSelect.bind(this);
+    state = {
+        data: [
+            {label: 'Going to learn React', important: true, like: false, id: 1},
+            {label: 'Something more', important: false, like: false, id: 2},
+            {label: "I'm not feel so good", important: false, like: false, id: 3}
+        ],
+        term: '',
+        filter: 'all'
     }
 
-    deleteItem(id) {
+    deleteItem = (id) => {
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
 
@@ -55,7 +46,7 @@ export default class App extends Component  {
         });
     }
 
-    addItem(body) {
+    addItem = (body) => {
         const newItem = {
             label: body,
             important: false,
@@ -70,7 +61,7 @@ export default class App extends Component  {
         });
     }
 
-    _setImporLike(id, component='important') {
+    _setImporLike = (id, component='important') => {
         this.setState(({data}) => {
             const newData = data.map(item => {
                 if (item.id === id && component === 'important') {item.important = !item.important; return item}
@@ -83,15 +74,15 @@ export default class App extends Component  {
         });
     }
 
-    onToggleImportant(id) {
+    onToggleImportant =(id) => {
         this._setImporLike (id)
     }
 
-    onToggleLiked(id) {
+    onToggleLiked = (id) => {
         this._setImporLike (id, 'like')
     }
 
-    searchPost(items, term) {
+    searchPost = (items, term) => {
         if (term.length === 0) return items;
 
         return items.filter(item => {
@@ -99,16 +90,16 @@ export default class App extends Component  {
         });
     }
 
-    filterPost (items, filter) {
+    filterPost = (items, filter) => {
         if (filter === 'like') return items.filter(item => item.like);
         else return items;
     }
 
-    onUpdateSearch(term) {
+    onUpdateSearch = (term) => {
         this.setState({term})
     }
 
-    onFilterSelect(filter) {
+    onFilterSelect = (filter) => {
         this.setState({filter})
     }
 
@@ -125,13 +116,13 @@ export default class App extends Component  {
                     liked={liked}
                     allPosts={allPosts}
                 />
-                <div className='search-panel d-flex'>
+                <SearchPanelStyle>
                     <SearchPanel
                         onUpdateSearch={this.onUpdateSearch}/>
                     <PostStatusFilter
                         filter={filter}
                         onFilterSelect={this.onFilterSelect}/>
-                </div>
+                </SearchPanelStyle>
                 <PostList
                     posts={visiblePosts}
                     onDelete={this.deleteItem}

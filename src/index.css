@@ -1,11 +1,3 @@
-@import "./components/search-panel/search-panel.css";
-@import "./components/app-header/app-header.css";
-@import "./components/app/app.css";
-@import "./components/post-add-form/post-add-form.css";
-@import "./components/post-list/post-list.css";
-@import "./components/post-list-item/post-list-item.css";
-@import "./components/post-status-filter/post-status-filter.css";
-
 
 body {
   margin: 50px 0 0 0;

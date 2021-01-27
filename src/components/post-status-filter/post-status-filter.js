@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
 
 export default class PostStatusFilter extends Component {
-    constructor(props) {
-        super(props);
-        this.buttons = [
-            {name: 'all', label: 'Все'},
-            {name: 'like', label: 'Понравилось'}
-        ]
-    }
+    buttons = [
+        {name: 'all', label: 'Все'},
+        {name: 'like', label: 'Понравилось'}
+    ]
 
     render() {
         const buttons = this.buttons.map(({name, label}) => {
